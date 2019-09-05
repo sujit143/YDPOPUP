@@ -1,0 +1,697 @@
+<div>
+<mat-tab-group animationDuration="0ms">
+  <mat-tab label="Demographics">
+
+
+<div class="modal-body">
+  <div class="row">
+    <div class="col-sm-10">
+      <div class="card text-white bg-secondary mb-3">
+        <div class="card-header">Enter Patient Informartion</div>
+        <div class="card-body">
+          <form [formGroup]="details">
+            <div class="form-group row">
+
+              <div class="form-group col-md-2">
+                <label>Patient Name</label>
+                <input  formControlName="patientname" type="text" class="form-control" placeholder="Patient name" >
+                <label class="alert alert-danger" *ngIf="details.get('patientname').hasError('required') && !details.get('patientname').pristine">
+                    Name is Required
+                </label>
+              </div>
+
+              <div class="form-group col-md-2">
+                <label>DOB</label>
+                <input formControlName="dob" type="date" class="form-control">
+              </div>
+
+              <!-- <div class="form-group col-md-2">
+                <label>Patient DOB</label>
+                <input type="date" name="bday">
+              </div> -->
+
+              <div class="form-group col-md-2">
+                <label>Phone</label>
+                <input formControlName="phone" type="text" class="form-control" placeholder="Phone">
+              </div>
+
+              <div class="form-group col-md-2">
+                <label>Email</label>
+                <input formControlName="email" type="text" class="form-control" placeholder="Email">
+              </div>
+              <div class="form-group col-md-2">
+                <button type="submit" class="btn btn-info" *ngIf="!isActive"  (click)=openEdit(content,i)>continue</button>
+              </div>
+            </div>
+          </form>
+          <div>Caller Details</div>
+          <hr color="white">
+          <div class="card-body">
+            <form [formGroup]="callerdetails">
+              <div class="form-group row">
+
+                <div class="form-group col-md-2">
+                  <label>Name</label>
+                  <input  formControlName="callername" type="text" class="form-control" placeholder="Caller Name">
+                </div>
+
+                <div class="form-group col-md-2">
+                  <label>Phone</label>
+                  <input formControlName="phoneno" type="text" class="form-control" placeholder="Phone no.">
+                </div>
+
+                <div class="form-group col-md-2">
+                  <label>Relationship to Patient</label>
+                  <mat-form-field>
+                    <!-- <mat-label>Select</mat-label> -->
+                    <mat-select >
+                      <mat-option>Select</mat-option>
+                      <mat-option value="option1">Child</mat-option>
+                      <mat-option value="option2">Parent</mat-option>
+                      <mat-option value="option3">Self</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+
+              <input type="checkbox"  (click)="onCheck()"  *ngIf="onCheck">Call patient to book Appointments
+              <div class="form-group col-md-2">
+                  <button type="submit" class="btn btn-success" *ngIf="isActive">Finish</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</mat-tab>
+
+
+
+<div class="col-md-2 tbs tabActive tbswidth" style="width: 170px !important" id="TabDemographics">
+    <h3><span class="badge badge-warning">P1</span>&nbsp;Demographics <span id="spnTabDemographics" style="margin-right: 10px;"></span></h3>
+  </div>
+
+
+
+<mat-tab label="Insurance">
+    <div class="modal-body">
+        <div class="row">
+          <div class="col-sm-10">
+            <div class="card text-white bg-secondary mb-3">
+              <div class="card-header">Enter Insurance Informartion</div>
+              <div class="card-body">
+                <form [formGroup]="details">
+                  <div class="form-group row">
+
+                    <div class="form-group col-md-12">
+                      <label>Date Of Accident</label>
+                      <input  formControlName="patientname" type="date" class="form-control" placeholder="Date Of Accident" >
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <div class="form-group col-md-12">
+                      <label>Accident ZIP</label>
+                      <input formControlName="phone" type="text" class="form-control" placeholder="Accident ZIP">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <div class="form-group col-md-12">
+                      <label>Accident City</label>
+                      <input formControlName="email" type="text" class="form-control" placeholder="Accident City">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                      <div class="form-group col-md-12">
+                        <label>Accident State</label>
+                        <input formControlName="email" type="text" class="form-control" placeholder="Accident State">
+                      </div>
+                    </div>
+                </form>
+                <div>Caller Details</div>
+                <hr color="white">
+                <div class="card-body">
+                  <form [formGroup]="callerdetails">
+                    <div class="form-group row">
+                            <div>
+                              <mat-label>Was patient hospitalized?</mat-label>
+                                <mat-checkbox>Yes</mat-checkbox>&nbsp;&nbsp;
+                                <mat-checkbox>No</mat-checkbox>&nbsp;&nbsp;
+                            </div>
+                          </div>
+                          <div class="form-group row">
+                              <div>
+                                <mat-label>Did patient go to emergency room?</mat-label>
+                                  <mat-checkbox>Yes</mat-checkbox>&nbsp;&nbsp;
+                                  <mat-checkbox>No</mat-checkbox>&nbsp;&nbsp;
+                              </div>
+                            </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  <!-- <h1>Insurance</h1> -->
+</mat-tab>
+
+
+
+
+
+
+
+
+
+<mat-tab label="Appointments">
+    <div class="modal-body">
+        <div class="row">
+          <div class="col-sm-10">
+            <div class="card text-white bg-secondary mb-3">
+              <div class="card-header">Enter Insurance Informartion</div>
+              <div class="card-body">
+                <form [formGroup]="details">
+                    <div class="form-group row">
+                        <button class="btn btn-success">Adminitrative Request</button>
+                    </div>
+                    <h4>General office visits</h4>
+                    <label class="btn btn-default button radioBtn">
+                        <input type="radio" >
+                        Consultation
+                    </label>
+                    <label class="btn btn-default button radioBtn">
+                        <input type="radio" >
+                        Depo
+                    </label>
+                    <label class="btn btn-default button radioBtn">
+                        <input type="radio" >
+                        Depo
+                    </label>
+                    <h4>Diagnostic Appointments</h4>
+                    <label class="btn btn-default button radioBtn">
+                        <input type="radio" >
+                        Depo
+                    </label>
+                    <label class="btn btn-default button radioBtn">
+                        <input type="radio" >
+                        Depo
+                    </label>
+                    <label class="btn btn-default button radioBtn">
+                        <input type="radio" >
+                        Depo
+                    </label>
+                    <h4>In Office Procedure</h4>
+                    <label class="btn btn-default button radioBtn">
+                        <input type="radio">
+                        Depo
+                    </label>
+                    <label class="btn btn-default button radioBtn">
+                        <input type="radio" >
+                        Depo
+                    </label>
+                    <label class="btn btn-default button radioBtn">
+                        <input type="radio" >
+                        Depo
+                    </label>
+                    <h4>In Office Procedure</h4>
+                    <label class="btn btn-default button radioBtn">
+                        <input type="radio" >
+                        Depo
+                    </label>
+                    <label class="btn btn-default button radioBtn">
+                        <input type="radio" >
+                        Depo
+                    </label>
+                    <label class="btn btn-default button radioBtn">
+                        <input type="radio">
+                        Depo
+                    </label>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  <!-- <h1>Appointments </h1> -->
+</mat-tab>
+
+
+
+
+
+
+
+
+
+
+
+<!-- <h3><span class="badge badge-warning">P4</span>&nbsp;Referral Source</h3> -->
+<mat-tab label="Referral Source">
+    <div class="modal-body">
+        <div class="row">
+          <div class="col-sm-10">
+            <div class="card text-white bg-secondary mb-3">
+              <div class="card-header">Referral Source Information</div>
+              <div class="card-body">
+                <form [formGroup]="details">
+                    <h4>Referral Source Information</h4>
+                    <hr color="white">
+                    <div class="form-group row">
+                    <div class="form-group col-md-3">
+                        <label >Source of Referral</label>
+                        <select  class="form-control">
+                            <option value="empoyee">empoyee</option>
+                            <option value="provider">provider</option>
+                            <option value="office">office</option>
+                            <option value="post">post</option>
+                        </select>
+                      </div>
+                      <div class="form-group col-md-8">
+                          <label>Select Referral Source Member</label><br>
+                    <input type="text" placeholder="select member">
+                    </div>
+                  </div>
+
+
+
+
+
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  <!-- <h1>Referral Source </h1> -->
+</mat-tab>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<mat-tab label="Documents">
+    <div class="modal-body">
+        <div class="row">
+          <div class="col-sm-10">
+            <div class="card text-white bg-secondary mb-3">
+              <div class="card-header">Documents</div>
+
+              <div class="card-body">
+                <form [formGroup]="details">
+<!-- start -->
+                    <div class="row">
+                        <div class="col-md-12" style="margin-top: 22px; padding:0px;">
+                            <div class="panel-group">
+
+                                <div class="panel panel-default" style="margin-bottom: 2px;">
+                                    <div class="panel-heading rea" style="background-color: #4590d2; padding: 10px 5px 2px 5px;">
+
+                                        <h3 style="font-size:95%;">
+                                            <a data-toggle="collapse" data-parent="#accordion" href=".dvRefSrcSection" style="color: white;" class="awvAccordionanc collapsed">Search / Filter Documents</a>
+                                            <span style="float: right;">
+                                                <span class="" id="dvAddNewDoc">
+
+                                                </span>
+                                            </span>
+                                        </h3>
+                                    </div>
+                                  </div>
+
+
+
+
+
+                            </div>
+                            <div id="dvepisodeDocmentFoldersfileslist">
+                                <!-- <a href="javascript:void(0)" class="btn btn-primary btn-sm hide" id="btnGiveAccess" data-geturl="/Patient/UpdateMultipleDocumentAccessMember" data-updatecontainer="#dvPopupTopNode">Give Access To Member</a><br> -->
+
+                      <table class="table table-striped" style="width: 100%; table-layout: fixed;">
+                        <tbody><tr>
+                          <td><span class="warning">No Files Found</span></td>
+                        </tr>
+                      </tbody></table>
+
+                    <div class="custompagination pull-right epdocuments" style="margin-top:-17px" data-req-url="/Patient/GetEpisodeFoldersDocumentFiles" data-update-container="#dvepisodeDocmentFoldersfileslist">
+                      <span class="label pagerInfo">Total Items <b>0</b></span>
+
+
+                    </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+<!-- end -->
+
+                </form>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+  <!-- <h1>Documents </h1> -->
+</mat-tab>
+
+
+
+
+
+
+
+
+
+<mat-tab label="Care Team">
+    <div class="modal-body">
+        <div class="row">
+          <div class="col-sm-10">
+            <div class="card text-white bg-secondary mb-3">
+              <div class="card-header">Care Team</div>
+
+              <div class="card-body">
+                <form [formGroup]="details">
+
+                  <table class="table table-striped">
+                        <thead>
+                          <tr>
+                            <th scope="col">Member/Group</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Role Name</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+
+                            <td>Mark</td>
+                            <td>Otto</td>
+                            <td>@mdo</td>
+
+                          </tr>
+                          <tr>
+
+                            <td>Jacob</td>
+                            <td>Thornton</td>
+                            <td>@fat</td>
+                          </tr>
+                          <tr>
+
+                            <td>Larry</td>
+                            <td>the Bird</td>
+                            <td>@twitter</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                </form>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+  <!-- <h1>Care Team </h1> -->
+</mat-tab>
+
+
+
+
+
+
+
+
+<mat-tab label="Appointment Memo">
+    <div class="modal-body">
+        <div class="row">
+          <div class="col-sm-10">
+            <div class="card text-white bg-secondary mb-3">
+              <div class="card-header">Appointment Memo</div>
+
+              <div class="card-body">
+                <form [formGroup]="details">
+                    <!-- <h4>Referral Source Information</h4>
+                    <hr color="white"> -->
+                    <!-- <div class="form-group row">
+                        <div class="form-group col-md-8">
+                            <label>
+                                Comments
+                            <textarea class="form-control" style="height:115px !important" ></textarea>
+                          </label>
+                          </div>
+                      </div> -->
+                      <div class="row">
+                          <div class="col-md-12">
+                             <div class="col-md-6">
+                                  <label>Comments</label>
+                                  <textarea class="form-control" style="height:115px !important" maxlength="5000" id="txtScheduleAppointmentCaseMemo"></textarea>
+                              </div>
+                        </div>
+                          <br>
+                      </div>
+                </form>
+              </div>
+           </div>
+          </div>
+        </div>
+      </div>
+  <!-- <h1>Appointment Memo </h1> -->
+</mat-tab>
+
+
+
+
+
+</mat-tab-group>
+</div>
+
+
+<ng-template #content let-modal>
+    <!-- <div class="model-content" style="width:max-content"> -->
+    <!-- <div class="modal-dialog modal-xl" class="modal-content"> -->
+      <!-- <div class="modal-content"> -->
+      <div class="modal-header">
+        <h5 class="modal-title" id="modal-basic-title">Patient Information</h5>
+        <button type="button" class="close bg bg-danger" aria-label="Close" (click)="modal.dismiss('Cross click')">
+          <span aria-hidden="true">Close</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+
+        <div class="row">
+
+          <div class="col-sm-6">
+            <div class="card text-white bg-secondary mb-3">
+              <div class="card-header">General Informartion</div>
+              <hr>
+              <div class="card-body">
+                <form [formGroup]="general" (ngSubmit)="onUserSave()">
+                  <div class="form-group row">
+                    <div class="form-group col-md-4">
+                      <label>First Name</label>
+                      <input formControlName="firstname" type="text" class="form-control" placeholder="First Name">
+                    </div>
+                    <div class="form-group col-md-4">
+                      <label>Middle Name</label>
+                      <input formControlName="middlename" type="text" class="form-control" placeholder="Middle Name">
+                    </div>
+                    <div class="form-group col-md-4">
+                      <label>Last Name</label>
+                      <input formControlName="lastname" type="text" class="form-control" placeholder="Last Name">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <div class="form-group col-md-4">
+                      <label>DOB</label>
+                      <input formControlName="dob" type="date" class="form-control">
+                    </div>
+                    <div class="form-group col-md-4">
+                      <label>Gender</label>
+                      <input formControlName="gender" class="form-control" type="text" list="genders" placeholder="Gender">
+                      <datalist id="genders">
+                        <option value="Select">
+                        <option value="Female">
+                        <option value="Male">
+                        <option value="Other">
+                      </datalist>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-6">
+            <div class="card text-white bg-secondary mb-3">
+              <div class="card-header">Address Information</div>
+              <hr>
+              <div class="card-body">
+                <form [formGroup]="address" (ngSubmit)="onUserSave()">
+                  <div class="form-group row">
+                    <div class="form-group col-md-4">
+                      <label>Address 1</label>
+                      <input formControlName="address1" type="text" class="form-control" placeholder="Address 1">
+                    </div>
+                    <div class="form-group col-md-4">
+                      <label>Address 2</label>
+                      <input formControlName="address2" type="text" class="form-control" placeholder="Address 2">
+                    </div>
+                    <div class="form-group col-md-4">
+                      <label>ZIP</label>
+                      <input formControlName="zip" type="text" class="form-control" placeholder="ZIP">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <div class="form-group col-md-4">
+                      <label>City</label>
+                      <input formControlName="city" type="text" class="form-control" placeholder="City">
+                    </div>
+                    <div class="form-group col-md-4">
+                      <label>State</label>
+                      <input formControlName="state" class="form-control" type="text" list="states" placeholder="State">
+                      <datalist id="states">
+                        <option value="Select">
+                        <option value="AE">
+                        <option value="AL">
+                        <option value="AK">
+                        <option value="AS">
+                        <option value="CO">
+                        <option value="CL">
+                        <option value="IN">
+                        <option value="ID">
+                        <option value="ZN">
+                      </datalist>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="row">
+
+          <div class="col-sm-6">
+            <div class="card text-white bg-secondary mb-3">
+              <div class="card-header">Contact Information</div>
+              <hr>
+              <div class="card-body">
+                <form [formGroup]="contact" (ngSubmit)="onUserSave()">
+                  <div class="form-group row">
+                    <div class="form-group col-md-4">
+                      <label>Home #</label>
+                      <input formControlName="home" type="text" class="form-control" placeholder="Home #">
+                    </div>
+                    <div class="form-group col-md-4">
+                      <label>Cell #</label>
+                      <input formControlName="cell" type="text" class="form-control" placeholder="Cell #">
+                    </div>
+                    <div class="form-group col-md-4">
+                      <label>Work Phone #</label>
+                      <input formControlName="workphone" type="text" class="form-control" placeholder="Work Phone #">
+                    </div>
+                  </div>
+                  <div class="form-group row">
+                    <div class="form-group col-md-4">
+                      <label>Email</label>
+                      <input formControlName="email" type="text" class="form-control" placeholder="Email">
+                    </div>
+                    <div class="form-group col-md-4">
+                      <label>Preferred Mode of Contact</label>
+                      <input formControlName="mode" class="form-control" type="text" list="modes" placeholder="Preferred Mode of Contact">
+                      <datalist id="modes">
+                        <option value="Select">
+                        <option value="Email">
+                        <option value="Phone">
+                        <option value="Text">
+                      </datalist>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-6">
+            <div class="card text-white bg-secondary mb-3">
+              <div class="card-header">Other Information</div>
+              <hr>
+              <div class="card-body">
+                <form [formGroup]="other" (ngSubmit)="onUserSave()">
+                  <div class="form-group row">
+                    <div class="form-group col-md-6">
+                      <label>SSN</label>
+                      <input formControlName="ssn" type="text" class="form-control" placeholder="SSN">
+                    </div>
+                    <div class="form-group col-md-6">
+                      <label>Preferred Language</label>
+                      <input formControlName="language" class="form-control" type="text" list="languages" placeholder="Preferred Language">
+                      <datalist id="languages">
+                        <option value="Select">
+                        <option value="Arabic">
+                        <option value="English">
+                        <option value="French">
+                        <option value="Greek">
+                        <option value="Japanese">
+                        <option value="Tamil">
+                      </datalist>
+                    </div>
+                  </div>
+                  <!-- <div class="form-group row">
+                     <p>Authorization to contact patient</p>
+                    </div> -->
+
+                    <p>Authorization to contact patient</p>
+                    <hr>
+
+                    <div class="form-group row">
+                    <div>
+                        <mat-checkbox>Email</mat-checkbox>&nbsp;&nbsp;
+                    </div>
+                    <div>
+                        <mat-checkbox>Phone</mat-checkbox>&nbsp;&nbsp;
+                    </div>
+                    <div>
+                        <mat-checkbox>Text</mat-checkbox>&nbsp;&nbsp;
+                    </div>
+                  </div>
+                </form>
+              </div>
+
+            </div>
+            <div>
+              <a href="javascript:void(0)" class="btn btn-warning">Previous</a>
+              <a href="javascript:void(0)" class="btn btn-info">Next</a>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    <!-- </div> -->
+
+  </ng-template>
+
+
+
+
+
+
+
+
+
+
